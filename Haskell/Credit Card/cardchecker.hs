@@ -25,4 +25,9 @@ luhn :: Integer -> Bool
 luhn n = sumDigits (doubleEveryOther (digits n)) `mod` 10 == 0
 
 main = do
-    print(luhn 1234567898765432)
+    -- Read in the card number and cast it to Integer to use the
+    -- luhn method on. Input in Haskell is weird so I'm not sure
+    -- if this is an acceptable way.
+    putStrLn "Enter card number > "
+    number <- getLine
+    print (luhn (read number :: Integer))
