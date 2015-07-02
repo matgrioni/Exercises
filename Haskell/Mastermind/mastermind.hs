@@ -29,8 +29,24 @@ exactMatches :: Code -> Code -> Int
 exactMatches actual guess = length (filter (\(a, b) -> a == b) zipped)
     where zipped = zip actual guess
 
+-- Returns a list parallel to the colors list with the counts for the color
+-- corresponding to the number position.
 countColors :: Code -> [Int]
-countColors code = undefined
+countColors code = map (count code) colors
+
+-- The amount of total shared colors between both codes. Would be inexact
+-- plus exact matches.
+matches :: Code -> Code -> Int
+matches c1 c2 = sum [min a b | (a, b) <- zipped]
+    where zipped = zip (countColors c1) (countColors c2)
+
+-- Returns a Move given the first code as the actual and the second as the
+-- guess. A Move consists of a guess, the number of exact matches, the number
+-- of inexact matches.
+getMove :: Code -> Code -> Move
+getMove actual guess = Move guess exact inexact
+    where exact = exactMatches actual guess
+          inexact = (-) (matches actual guess) exact
 
 main = do
-    putStrLn "Hello, World!"
+    print "Hello, World"
