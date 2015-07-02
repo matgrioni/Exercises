@@ -11,6 +11,7 @@ type Code = [Peg]
 -- A move is created by a code and the number of exact matches
 -- and the number of inexact matches
 data Move = Move Code Int Int
+    deriving (Show, Eq)
 
 -- List of all the possible colors
 colors :: [Peg]
@@ -48,5 +49,10 @@ getMove actual guess = Move guess exact inexact
     where exact = exactMatches actual guess
           inexact = (-) (matches actual guess) exact
 
+-- A Move is consistent with a code if the amount of inexact and exact matches
+-- in a Move is possible with the provided code
+isConsistent :: Move -> Code -> Bool
+isConsistent move cons = undefined
+
 main = do
-    print "Hello, World"
+    print (isConsistent (Move [Red, Red, Blue, Green] 1 1) [Red, Blue, Yellow, Purple])
