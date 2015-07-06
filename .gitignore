@@ -1,2 +1,2 @@
-# Ignore compiled haskell files
+# Ignore compiled python files
 *.pyc
