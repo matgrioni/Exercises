@@ -3,10 +3,10 @@
 def nextValue(currentValue):
     return (currentValue * a + b) % n
 
-a = int(input("Multiplicative constant (a) > "))
-b = int(input("Additive contant (b) > "))
-x0 = int(input("Initial value (x-0) > "))
-n = int(input("Modulus value > "))
+a = int(raw_input("Multiplicative constant (a) > "))
+b = int(raw_input("Additive contant (b) > "))
+x0 = int(raw_input("Initial value (x-0) > "))
+n = int(raw_input("Modulus value > "))
 
 data = ""
 indexedValue = x0
@@ -15,12 +15,9 @@ for i in range(n):
     data += str(indexedValue) + " "
     indexedValue = nextValue(indexedValue)
 
-lcgFile = open("lcg.txt", "w")
-numbers = data.split()
-for i in range(1, len(numbers) + 1):
-    lcgFile.write("%4s " % str(numbers[i-1]))
+with open("lcg.txt", "w") as f:
+    for (i, num) in enumerate(data.split()):
+        f.write("{:<4} ".format(num))
 
-    if i % 16 == 0:
-        lcgFile.write("\n")
-
-lcgFile.close()
+        if (i + 1) % 16 == 0:
+            f.write("\n")
